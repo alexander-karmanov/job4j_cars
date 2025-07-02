@@ -31,7 +31,11 @@ public class UserRepository {
      * @param user пользователь.
      */
     public void update(User user) {
-
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
+        session.close();
     }
 
     /**
@@ -39,7 +43,13 @@ public class UserRepository {
      * @param userId ID
      */
     public void delete(int userId) {
-
+        Session session = sf.openSession();
+        session.beginTransaction();
+        User user = new User();
+        user.setId(userId);
+        session.delete(user);
+        session.getTransaction().commit();
+        session.close();
     }
 
     /**
@@ -47,15 +57,26 @@ public class UserRepository {
      * @return список пользователей.
      */
     public List<User> findAllOrderById() {
-        return List.of();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        List<User> result = session.createQuery("from ru.job4j.cars.model.User u order by u.id", User.class).list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 
     /**
      * Найти пользователя по ID
      * @return пользователь.
      */
+
     public Optional<User> findById(int userId) {
-        return Optional.empty();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        User result = session.get(User.class, userId);
+        session.getTransaction().commit();
+        session.close();
+        return Optional.ofNullable(result);
     }
 
     /**
@@ -64,7 +85,15 @@ public class UserRepository {
      * @return список пользователей.
      */
     public List<User> findByLikeLogin(String key) {
-        return List.of();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        List<User> result = session.createQuery(
+                        "from ru.job4j.cars.model.User u where u.login like :pattern", User.class)
+                .setParameter("pattern", "%" + key + "%")
+                .list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 
     /**
@@ -73,6 +102,14 @@ public class UserRepository {
      * @return Optional or user.
      */
     public Optional<User> findByLogin(String login) {
-        return Optional.empty();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        User result = session.createQuery(
+                        "from ru.job4j.cars.model.User u where u.login = :login", User.class)
+                .setParameter("login", login)
+                .uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return Optional.ofNullable(result);
     }
 }

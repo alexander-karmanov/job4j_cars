@@ -10,6 +10,7 @@ public class UserUsage {
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
+
         try (SessionFactory sf = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory()) {
             var userRepository = new UserRepository(sf);
@@ -17,7 +18,7 @@ public class UserUsage {
             user.setLogin("admin");
             user.setPassword("admin");
             userRepository.create(user);
-            /* userRepository.findAllOrderById()
+            userRepository.findAllOrderById()
                     .forEach(System.out::println);
             userRepository.findByLikeLogin("e")
                     .forEach(System.out::println);
@@ -31,7 +32,7 @@ public class UserUsage {
                     .ifPresent(System.out::println);
             userRepository.delete(user.getId());
             userRepository.findAllOrderById()
-                    .forEach(System.out::println); */
+                    .forEach(System.out::println);
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
