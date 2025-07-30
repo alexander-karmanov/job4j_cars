@@ -1,7 +1,7 @@
-create table auto_post
+CREATE TABLE auto_post
 (
-    id serial primary key,
-    description varchar not null,
-    created timestamp,
-    auto_user_id int references auto_user(id)
+    id SERIAL PRIMARY KEY,
+    description VARCHAR NOT NULL,
+    created TIMESTAMP,
+    auto_user_id INT REFERENCES auto_user(id)
 );
