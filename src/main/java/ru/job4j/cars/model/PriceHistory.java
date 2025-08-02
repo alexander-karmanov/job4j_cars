@@ -19,4 +19,8 @@ public class PriceHistory {
     private int before;
     private int after;
     LocalDateTime created;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
 }
