@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS engine (
+    id SERIAL PRIMARY KEY,
+    name TEXT
+);
