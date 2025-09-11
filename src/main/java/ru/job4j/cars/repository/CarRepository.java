@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CarRepository {
     List<Car> getAll();
 
-    Optional<Car> findCarById(int id);
+    Optional<Car> findCarById(Long id);
 
     Car saveCar(Car car);
 }

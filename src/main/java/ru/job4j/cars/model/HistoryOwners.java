@@ -17,7 +17,7 @@ public class HistoryOwners {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "car_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
+    @JoinColumn(name = "car_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"), nullable = false)
     private Car car;
 
     @ManyToOne

@@ -10,8 +10,7 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class HibernateOwnerRepository implements OwnerRepository {
-
+public class HbmOwnerRepository implements OwnerRepository {
     private final CrudRepository crudRepository;
 
     @Override

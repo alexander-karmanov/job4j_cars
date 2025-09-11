@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class HbmCarRepository  implements CarRepository {
+public class HbmCarRepository implements CarRepository {
 
     private final CrudRepository crudRepository;
 
@@ -24,7 +24,7 @@ public class HbmCarRepository  implements CarRepository {
     }
 
     @Override
-    public Optional<Car> findCarById(int id) {
+    public Optional<Car> findCarById(Long id) {
         return crudRepository.optional(
                 "FROM Car WHERE id = :id",
                 Car.class,
